@@ -77,20 +77,73 @@ class LinkedList:
             self.tail = None
         return temp
 
-    # def insert(self, index, value):    #add node inbetween nodes
+    # input  : int value
+    # output : returns node
+
+    # so head index will be 0 and so on where length of the linked list will be (tail-index + 1)
+    def get(self, index):
+        if index < 0 or index >= self.length:
+            return None
+        temp = self.head
+        for _ in range(index):
+            temp = temp.next
+        # returns the node , the value should be obtained using the . operator
+        return temp
+
+    # input  : int index , int value
+    # outptu : returns node (updated value node)
+    def set_value(self, index, value):
+        # writing this method without the get method
+        # if index < 0 or index >= self.length:
+        #     return None
+        # temp = self.head
+        # for _ in range(index):
+        #     temp = temp.next
+        # temp.value = value
+        # return temp
+        # writing this method with the help of get method
+        temp = self.get(index)
+        if temp:  # this is actually another way of writing if temp != None:
+            temp.value = value
+            return True
+        return False
+
+    def insert(self, index, value):  # add node inbetween nodes
+        if index < 0 or index >= self.length:
+            return None
+        new_node = Node(value)
+        temp = self.head
+        for _ in range(index-1):
+            temp = temp.next
+        previous_node = temp
+        temp = temp.next
+        next_node = temp
+        previous_node.next = new_node
+        new_node.next = next_node
+        return new_node
 
 
-myLinkedList = LinkedList(4)
-myLinkedList.append(5)
-myLinkedList.prepend(2)
-print(myLinkedList.pop_first())
-print(myLinkedList.pop_first())
-print(myLinkedList.pop_first())
-print(myLinkedList.pop_first())
+myLinkedList = LinkedList(1)
+myLinkedList.prepend(0)
+myLinkedList.append(2)
+myLinkedList.append(3)
+myLinkedList.append(4)
+
+
+print(myLinkedList.get(4).value)
+print(myLinkedList.set_value(4, 3))
+print(myLinkedList.get(4).value)
+
+myLinkedList.insert(4, 4)
+
+# print(myLinkedList.pop_first())
+# print(myLinkedList.pop_first())
+# print(myLinkedList.pop_first())
+# print(myLinkedList.pop_first())
 
 
 # print(myLinkedList.pop())
 # print(myLinkedList.pop())
 # print(myLinkedList.pop())
-
+print("printing the linked list")
 myLinkedList.print_list()
