@@ -110,7 +110,9 @@ class LinkedList:
 
     def insert(self, index, value):  # add node inbetween nodes
         if index < 0 or index >= self.length:
-            return None
+            return False
+        if index == 0:
+            return self.prepend(value)
         new_node = Node(value)
         temp = self.head
         for _ in range(index-1):
@@ -120,7 +122,7 @@ class LinkedList:
         next_node = temp
         previous_node.next = new_node
         new_node.next = next_node
-        return new_node
+        return True
 
 
 myLinkedList = LinkedList(1)
@@ -136,14 +138,5 @@ print(myLinkedList.get(4).value)
 
 myLinkedList.insert(4, 4)
 
-# print(myLinkedList.pop_first())
-# print(myLinkedList.pop_first())
-# print(myLinkedList.pop_first())
-# print(myLinkedList.pop_first())
-
-
-# print(myLinkedList.pop())
-# print(myLinkedList.pop())
-# print(myLinkedList.pop())
 print("printing the linked list")
 myLinkedList.print_list()
